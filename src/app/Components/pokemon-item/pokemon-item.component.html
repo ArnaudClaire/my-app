@@ -1,0 +1,26 @@
+<div
+  *ngIf="pokemon"
+  class="p-3 pokemon-{{ pokemon.sex }} row pokemon-item-container"
+  [appHighLightBackgroundColor]="pokemon.sex === 'male' ? 'blue' : 'pink'"
+  [highlightColor]="pokemon.sex === 'male' ? 'darkBlue' : 'purple'"
+>
+  <div class="d-flex flex-row align-items-center">
+    <span class="col-1">
+      {{ pokemon.id }}
+    </span>
+    <span class="col-10">
+      {{ pokemon.name }}
+    </span>
+
+    <div *ngIf="action === 'delete'; else update">
+      <button class="btn btn-primary" (click)="onDeletePokemon()">
+        Supprimer
+      </button>
+    </div>
+    <ng-template #update>
+      <button class="btn btn-primary" (click)="onUpdatePokemon()">
+        Modifier
+      </button>
+    </ng-template>
+  </div>
+</div>

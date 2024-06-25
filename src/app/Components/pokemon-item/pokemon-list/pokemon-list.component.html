@@ -1,0 +1,32 @@
+<h3>Pokemons</h3>
+<div class="row">
+  <div class="col-10">
+    <input class="form-control" type="text" [(ngModel)]="currentPokemonName" />
+  </div>
+  <div class="col-2">
+    <button (click)="onAddButtonClick()" class="btn btn-primary">
+      Ajouter
+    </button>
+  </div>
+</div>
+
+<div class="mt-2 mb-2" *ngIf="pokemonAdded; else noPokemon">
+  Un pokémon a été ajouté
+</div>
+
+<ng-template #noPokemon>
+  <div class="mt-2 mb-2">Aucun pokémon n'a été ajouté</div>
+</ng-template>
+
+<ng-container *ngFor="let pokemon of pokemons; let i = index">
+  <app-pokemon-item [pokemon]="pokemon" [action]="'delete'"> </app-pokemon-item>
+</ng-container>
+
+<ngb-toast
+  class="app-notif"
+  header="Pokemon supprimé"
+  *ngIf="deletedPokemonName"
+  (hide)="showToast = false"
+>
+  Le pokémon {{ deletedPokemonName }} a été supprimé
+</ngb-toast>
